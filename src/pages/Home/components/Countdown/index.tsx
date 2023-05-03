@@ -1,10 +1,31 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { CountdowContainer, Separator } from './styles'
 import { differenceInSeconds } from 'date-fns'
+import { CyclesContext } from '../..'
 
 export function Countdown() {
-  const [amountSecundsPassed, setAmountSecundsPassed] = useState(0)
+  const {
+    activeCycle,
+    activeCycleId,
+    markCurrentCycleAsFinished,
+    amountSecundsPassed,
+    setSecundsPassed,
+  } = useContext(CyclesContext)
   const totalSecunds = activeCycle ? activeCycle.minutesAmount * 60 : 0
+
+  const currentSecunds = activeCycle ? totalSecunds - amountSecundsPassed : 0
+
+  const minutesAmount = Math.floor(currentSecunds / 60)
+  const secundsAmount = currentSecunds % 60
+
+  const minutes = String(minutesAmount).padStart(2, '0')
+  const secunds = String(secundsAmount).padStart(2, '0')
+
+  useEffect(() => {
+    if (activeCycle) {
+      document.title = `${minutes}:${secunds}`
+    }
+  }, [minutes, secunds, activeCycle])
 
   useEffect(() => {
     let interval: number
@@ -17,26 +38,24 @@ export function Countdown() {
         )
 
         if (secondsDifference >= totalSecunds) {
-          setCycles((state) =>
-            state.map((cycle) => {
-              if (cycle.id === activeCycleId) {
-                return { ...cycle, finishedDate: new Date() }
-              } else {
-                return cycle
-              }
-            }),
-          )
-          setAmountSecundsPassed(totalSecunds)
+          markCurrentCycleAsFinished()
+          setSecundsPassed(totalSecunds)
           clearInterval(interval)
         } else {
-          setAmountSecundsPassed(secondsDifference)
+          setSecundsPassed(secondsDifference)
         }
       }, 1000)
       return () => {
         clearInterval(interval)
       }
     }
-  }, [activeCycle, totalSecunds, activeCycleId])
+  }, [
+    activeCycle,
+    totalSecunds,
+    activeCycleId,
+    markCurrentCycleAsFinished,
+    setSecundsPassed,
+  ])
 
   return (
     <CountdowContainer>
