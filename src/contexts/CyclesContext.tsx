@@ -58,24 +58,24 @@ export function CyclesContextProvider({
 
   function createNewCycle(data: CreateCycleData) {
     const id = String(new Date().getTime())
+
     const newCycle: Cycle = {
       id,
       task: data.task,
       minutesAmount: data.minutesAmount,
       startDate: new Date(),
     }
+
     setCycles((state) => [...state, newCycle])
     setActiveCycleId(id)
-    setAmountSecundsPassed(0)
-
-    // reset()
+    setSecundsPassed(0)
   }
 
   function iterruptCurrentCycle() {
     setCycles((state) =>
       state.map((cycle) => {
         if (cycle.id === activeCycleId) {
-          return { ...cycle, interuptedDate: new Date() }
+          return { ...cycle, interruptedDate: new Date() }
         } else {
           return cycle
         }
