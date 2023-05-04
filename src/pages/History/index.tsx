@@ -36,10 +36,16 @@ export function History() {
                     })}
                   </td>
                   <td>
-                    {cycle.interruptedDate ? (
+                    {cycle.finishedDate && (
+                      <Status statusColor="green">Concluído</Status>
+                    )}
+
+                    {cycle.interruptedDate && (
                       <Status statusColor="red">Interrompido</Status>
-                    ) : (
-                      <Status statusColor="yellow">Interrompido</Status>
+                    )}
+
+                    {!cycle.finishedDate && !cycle.interruptedDate && (
+                      <Status statusColor="yellow">Em andamento</Status>
                     )}
                   </td>
                 </tr>
@@ -51,15 +57,3 @@ export function History() {
     </HistoryContainer>
   )
 }
-
-// {cycle.finishedDate && (
-//   <Status statusColor="green">Concluído</Status>
-// )}
-
-// {cycle.interruptedDate && (
-//   <Status statusColor="red">Interrompido</Status>
-// )}
-
-// {!cycle.finishedDate && !cycle.interruptedDate && (
-//   <Status statusColor="yellow">Em andamento</Status>
-// )}
