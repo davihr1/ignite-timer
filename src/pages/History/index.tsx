@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { motion } from 'framer-motion'
 
 import { formatDistanceToNow } from 'date-fns'
 
@@ -25,7 +26,7 @@ export function History() {
           <tbody>
             {cycles.map((cycle) => {
               return (
-                <tr key={cycle.id}>
+                <motion.tr whileHover={{ scale: 0.9 }} key={cycle.id}>
                   <td>{cycle.task}</td>
                   <td>{cycle.minutesAmount} minutos</td>
                   <td>
@@ -47,7 +48,7 @@ export function History() {
                       <Status statusColor="yellow">Em andamento</Status>
                     )}
                   </td>
-                </tr>
+                </motion.tr>
               )
             })}
           </tbody>

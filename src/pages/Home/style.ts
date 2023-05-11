@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
 export const HomeContainer = styled.main`
   flex: 1;
@@ -16,7 +17,7 @@ export const HomeContainer = styled.main`
   }
 `
 
-export const BaseCoundownButton = styled.button`
+export const BaseCoundownButton = styled(motion.button)`
   width: 100%;
   border: 0;
   padding: 1rem;

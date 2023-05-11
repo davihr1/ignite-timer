@@ -46,12 +46,20 @@ export function Home() {
         <Countdown />
 
         {activeCycle ? (
-          <StopCoundownButton onClick={iterruptCurrentCycle} type="button">
+          <StopCoundownButton
+            whileTap={{ scale: 0.5 }}
+            onClick={iterruptCurrentCycle}
+            type="button"
+          >
             <HandPalm size={24} />
             Interromper
           </StopCoundownButton>
         ) : (
-          <StartCoundownButton disabled={isSubmitDisabled} type="submit">
+          <StartCoundownButton
+            disabled={isSubmitDisabled}
+            type="submit"
+            whileTap={{ scale: 0.5 }}
+          >
             <Play size={24} />
             Começar
           </StartCoundownButton>

@@ -23,7 +23,9 @@ export function Countdown() {
 
   useEffect(() => {
     if (activeCycle) {
-      document.title = `${minutes}:${secunds}`
+      document.title = `${activeCycle.task} ${minutes}:${secunds} | Pomodoro by Mercury`
+    } else {
+      document.title = `Pomodoro Ignite by Mercury`
     }
   }, [minutes, secunds, activeCycle])
 
