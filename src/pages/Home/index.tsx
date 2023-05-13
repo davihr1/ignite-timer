@@ -47,7 +47,7 @@ export function Home() {
 
         {activeCycle ? (
           <StopCoundownButton
-            whileTap={{ scale: 0.5 }}
+            whileHover={{ scale: 0.9 }}
             onClick={iterruptCurrentCycle}
             type="button"
           >
@@ -58,7 +58,7 @@ export function Home() {
           <StartCoundownButton
             disabled={isSubmitDisabled}
             type="submit"
-            whileTap={{ scale: 0.5 }}
+            whileTap={{ scale: 1.1 }}
           >
             <Play size={24} />
             Começar
